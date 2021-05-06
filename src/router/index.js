@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
 
@@ -59,8 +59,8 @@ export const constantRoutes = [
     path: '/example',
     component: Layout,
     redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    name: '表格',
+    meta: { title: '表格', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'table',
@@ -83,13 +83,42 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        name: 'Form',
+        name: '表单',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: '表单', icon: 'form' }
       }
     ]
   },
-
+  {
+    path: '/system-manage',
+    component: Layout,
+    redirect: '/system-manage/user-manage',
+    name: '系统管理',
+    meta: {
+      title: '系统管理',
+      icon: 'nested'
+    },
+    children: [
+      {
+        path: 'role-manage',
+        name: '角色管理',
+        component: () => import('@/views/system-manage/role-manage'),
+        meta: { title: '角色管理', icon: 'form' }
+      },
+      {
+        path: 'company-manage',
+        name: '机构与用户',
+        component: () => import('@/views/system-manage/company-manage/index'),
+        meta: { title: '机构与用户', icon: 'form' }
+      },
+      {
+        path: 'system-options',
+        name: '系统参数',
+        component: () => import('@/views/system-manage/system-options/index'),
+        meta: { title: '系统参数', icon: 'form' }
+      }
+    ]
+  },
   {
     path: '/nested',
     component: Layout,
@@ -148,18 +177,6 @@ export const constantRoutes = [
       }
     ]
   },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

@@ -63,3 +63,18 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+// 弹窗按钮剧中
+.operate-buttons{
+  display: flex;
+  justify-content: center;
+}
+.avue-crud__search {
+  padding-top: 10px;
+}
+.avue-crud__menu {
+  padding-left: 10px;
+
+}
+.link-left{
+  margin-left: 10px;
+}

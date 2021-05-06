@@ -1,30 +1,24 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <h3>快速新建</h3>
+    <div class="dashboard-contet">
+      <div>首次准入企业申请</div>
+      <div>已加白企业增补人员</div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Dashboard',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
+  name: 'Dashboard'
 }
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
-  }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
+.dashboard-contet {
+  height: 100px;
+  margin-top: 40px;
+  background: #fff;
 }
 </style>
