@@ -9,6 +9,7 @@
         <span v-if="showCheckbox">
           <el-checkbox v-model="checked" :indeterminate="indeterminate" @on-change="onChecked" />
         </span>
+        {{ props }}
         <span>{{ data[props.title] }}</span>
         <small v-show="selected && showEdit" class="icon-box">
           <a v-if="hasEdit" href="#" :disabled="disabled" @click="editHandle">
@@ -41,6 +42,10 @@ export default {
     data: {
       type: Object,
       default: () => {}
+    },
+    props: {
+      type: Object,
+      default: () => {}
     }
   },
   data() {
@@ -56,9 +61,6 @@ export default {
   },
 
   methods: {
-    props() {
-      return this.root.propsObject
-    },
     checked() {
       return this.data._checked
     },
