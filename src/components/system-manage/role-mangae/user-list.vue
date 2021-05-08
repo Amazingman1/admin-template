@@ -1,77 +1,58 @@
 <template>
-  <section class="component user-list">
-    <data-form :model="model" @onSearch="refreshData" :page="pageService">
-      <template slot="inputs">
-        <el-form-item label="用户名" prop="userName">
-          <el-input v-model="model.userName"></el-input>
-        </el-form-item>
-        <el-form-item label="姓名" prop="realName">
-          <el-input v-model="model.realName"></el-input>
-        </el-form-item>
-      </template>
-    </data-form>
-    <data-box :data="dataSet" @onPageChange="refreshData" :page="pageService">
-      <template slot="columns">
-      <!--数据列区域-->
-      <el-table-column label="用户名" prop="userName" :min-width="$helper.getColumnWidth(3)" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column label="姓名" prop="realName" :min-width="$helper.getColumnWidth(3)" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column label="电话" prop="phone" :min-width="$helper.getColumnWidth(3)" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column label="所属机构" prop="deptName" :min-width="$helper.getColumnWidth(3)" show-overflow-tooltip>
-      </el-table-column>
-      <el-table-column label="状态" prop="userStatus"  :formatter="(row) => $filter.dictConvert(row.userStatus,'CommonState')" :min-width="$helper.getColumnWidth(2)">
-      </el-table-column>
-      </template>
-    </data-box>
-  </section>
+  <div>
+    <el-table
+      :data="loadData"
+      highlight-current-row
+      style="width: 100%;"
+    >
+      <el-table-column type="index" label="序号" width="80" />
+      <el-table-column prop="name" label="角色名称" min-width="150" />
+      <el-table-column prop="description" label="角色描述" min-width="150" />
+      <el-table-column prop="roleStatus" label="状态" min-width="150" />
+      <el-table-column prop="createdBy" label="创建人" min-width="150" />
+      <!-- <el-table-column prop="createdAt" label="创建时间" min-width="150" /> -->
+      <!-- <el-table-column prop="updatedBy" label="更新人" min-width="150" /> -->
+      <!-- <el-table-column prop="updatedAt" label="更新时间" min-width="150" /> -->
+    </el-table>
+    <div class="operate-buttons">
+      <el-button type="primary" size="small">保 存</el-button>
+    </div>
+  </div>
 </template>
+<script>
 
-<script lang="ts">
-  import Vue from "vue";
-  import Component from "vue-class-component";
-  import DataForm from "~/components/common/data-form.vue";
-  import DataBox from "~/components/common/data-box.vue";
-  import { Dependencies } from "~/core/decorator";
-  import { PageService } from "~/utils/page.service";
-  import { UserService } from '~/services/management-service/user.service';
-
-
-  @Component({
-    components: {
-      DataForm,
-      DataBox
+export default {
+  data() {
+    return {
+      loadData1: [
+        {
+          name: '张三',
+          sex: '男'
+        }
+      ],
+      loadData2: [
+        {
+          name: '李四2',
+          sex: '女'
+        }
+      ]
     }
-  })
-  export default class UserList extends Vue {
-    @Dependencies(PageService) private pageService: PageService;
-    @Dependencies(UserService) private userService: UserService;
-
-    private model: any = {
-      roleId: '',
-      userName:'',
-      realName:'',
-      userStatus:''
-    };
-    private dataSet = null;
-
-    private refresh(id){
-      this.model.roleId = id
-      this.refreshData()
-    }
-
-    private refreshData(){
-      this.userService.getAllUsers(this.model, this.pageService).subscribe(data => {
-        this.dataSet = data;
-      }, ({ msg }) => {
-        
-      })
+  },
+  created() {
+    this.loadData = this.loadData1
+  },
+  methods: {
+    nodeClick(data) {
+      if (data.value === 0) {
+        this.loadData = this.loadData1
+      } else if (data.value === 1) {
+        this.loadData = this.loadData2
+      }
+      this.$message.success(JSON.stringify(data))
     }
   }
-
+}
 </script>
-
-<style lang="less" scoped>
+<style lang="scss" scoped>
 
 </style>

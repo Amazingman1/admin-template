@@ -51,7 +51,7 @@
       title="角色模块权限"
       :center="true"
       :visible.sync="dialog.module"
-      width="1200px"
+      width="1000px"
     >
       <module-permission
         ref="module-permission"
@@ -65,12 +65,11 @@
       :visible.sync="dialog.list"
       width="900px"
     >
-      <!-- <modify-role
+      <UserList
         ref="modify-role"
         :role-data="roleObj"
-        @close="dialog.modify = false"
-        @refreshList="refreshData"
-      /> -->
+        @close="dialog.list = false"
+      />
     </el-dialog>
   </div>
 </template>
@@ -79,13 +78,13 @@
 import DataList from '@/components/datalist/DataList'
 import ModifyRole from '@/components/system-manage/role-mangae/modify-role'
 import ModulePermission from '@/components/system-manage/role-mangae/module-permission'
-// import UserList from '@/components/system-manage/role-mangae/user-list'
+import UserList from '@/components/system-manage/role-mangae/user-list'
 export default {
   components: {
     DataList,
     ModifyRole,
-    ModulePermission
-    // UserList
+    ModulePermission,
+    UserList
   },
   data() {
     return {

@@ -59,13 +59,26 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/commo-page/add-news-paper',
     name: '新增报件',
+    meta: {
+      title: '新增报件',
+      icon: 'nested'
+    },
     // hidden: true,
-    children: [{
-      path: 'addpaper',
-      name: '新增报件',
-      component: () => import('@/views/commo-page/add-news-paper'),
-      meta: { title: '新增报件', icon: 'dashboard' }
-    }]
+    children: [
+      {
+        path: 'addpaper',
+        name: '新增报件',
+        component: () => import('@/views/commo-page/add-news-paper'),
+        meta: { title: '新增报件', icon: 'dashboard' }
+      },
+      {
+        path: 'add-form-paper',
+        name: '新增报件表单',
+        component: () => import('@/views/commo-page/add-form-paper'),
+        meta: { title: '新增报件表单', icon: 'dashboard' }
+      }
+
+    ]
   },
   {
     path: '/system-manage',

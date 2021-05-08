@@ -14,22 +14,28 @@
             <el-button type="primary" size="small">批量分配角色</el-button>
           </template>
           <template slot="option" slot-scope="scope">
-            <el-link type="primary" :underline="false" @click="editUser(scope.row)">修改用户</el-link>
-            <el-link type="primary" class="link-left" :underline="false" @click="editUser(scope.row)">分配角色</el-link>
+            <el-link type="primary" :underline="false" @click="editUser(scope.row, 'EditOrAddUserForm')">修改用户</el-link>
+            <el-link type="primary" class="link-left" :underline="false" @click="editUser(scope.row, 'AllotRole')">分配角色</el-link>
             <el-link type="primary" class="link-left" :underline="false" @click="editUser(scope.row)">重制密码</el-link>
             <el-link type="primary" class="link-left" :underline="false" @click="editUser(scope.row)">停用</el-link>
           </template>
         </avue-crud>
       </el-col>
     </el-row>
+    <EditOrAddUserForm ref="EditOrAddUserForm" :title="'修改用户'" />
+    <AllotRole ref="AllotRole" :title="'分配角色'" />
   </div>
 </template>
 <script>
 import SaidTree from './saideTree'
+import EditOrAddUserForm from './components/editOrAddUserForm'
+import AllotRole from './components/allotRole'
 
 export default {
   components: {
-    SaidTree
+    SaidTree,
+    EditOrAddUserForm,
+    AllotRole
   },
   data() {
     return {
@@ -201,8 +207,9 @@ export default {
     tip() {
       this.$message.success('自定义按钮')
     },
-    editUser(row) {
+    editUser(row, ref) {
       console.log(row, '用户')
+      this.$refs[ref].show()
     },
     onAdd() {},
     onEdit() {},

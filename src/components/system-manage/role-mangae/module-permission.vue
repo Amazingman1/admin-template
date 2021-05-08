@@ -4,13 +4,26 @@
       <el-aside width="200px">
         <avue-tree :option="treeOption" :data="treeData" @node-click="nodeClick" />
       </el-aside>
-      <el-main style="padding:0">
-        <avue-crud v-model="obj" :data="loadData" :option="loadOption" />
+      <el-main style="padding:0px">
+        <!-- <avue-crud v-model="obj" class="crud" :data="loadData" :option="loadOption" /> -->
+        <el-table
+          :data="loadData"
+          highlight-current-row
+          style="width: 100%;"
+        >
+          <el-table-column type="index" label="序号" width="80" />
+          <el-table-column prop="name" label="角色名称" min-width="150" />
+          <el-table-column prop="description" label="角色描述" min-width="150" />
+          <el-table-column prop="roleStatus" label="状态" min-width="150" />
+          <el-table-column prop="createdBy" label="创建人" min-width="150" />
+          <!-- <el-table-column prop="createdAt" label="创建时间" min-width="150" /> -->
+          <!-- <el-table-column prop="updatedBy" label="更新人" min-width="150" /> -->
+          <!-- <el-table-column prop="updatedAt" label="更新时间" min-width="150" /> -->
+        </el-table>
       </el-main>
     </el-container>
     <div class="operate-buttons">
       <el-button type="primary" size="small">保 存</el-button>
-
     </div>
   </div>
 </template>
@@ -47,7 +60,6 @@ export default {
           children: 'children'
         }
       },
-      loadData: [],
       loadData1: [
         {
           name: '张三',
@@ -59,27 +71,7 @@ export default {
           name: '李四2',
           sex: '女'
         }
-      ],
-      loadOption: {
-        page: false,
-        addBtn: false,
-        menu: false,
-        refreshBtn: false,
-        dateDefault: false,
-        columnBtn: false,
-
-        menuAlign: 'center',
-        column: [
-          {
-            label: '姓名',
-            prop: 'name'
-          },
-          {
-            label: '性别',
-            prop: 'sex'
-          }
-        ]
-      }
+      ]
     }
   },
   created() {
@@ -98,7 +90,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.avue-crud__menu {
-  min-height: 0px !important;
+.crud {
+  .el-card{
+      .el-card__body{
+    .avue-crud__menu {
+     min-height:  0 !important;
+    }
+  }
+  }
+
 }
 </style>
