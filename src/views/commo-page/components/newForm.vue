@@ -52,14 +52,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$boderColor: #EBEEF5;
+
 .bt{
-  border-top: solid 1px #ccc;
+  border-top: solid 1px $boderColor;
 }
 .fom-tale{
   .header{
     text-align: center;
     padding: 20px 0;
-    border: solid 1px #ccc ;
+    border: solid 1px $boderColor ;
   }
   .form-body{
     display: flex;
@@ -70,15 +72,15 @@ export default {
         flex: 1;
         text-align: center;
         padding: 20px 10px;
-        border-left: solid 1px #ccc;
-        border-right: solid 1px #ccc;
+        border-left: solid 1px $boderColor;
+        border-right: solid 1px $boderColor;
       }
     }
   }
   .form-footer{
     padding: 20px 20px 10px 20px;
-    border-left: solid 1px #ccc;
-    border-right: solid 1px #ccc;
+    border-left: solid 1px $boderColor;
+    border-right: solid 1px $boderColor;
     .form-footer-text{
       margin-top: 30px;
       display: flex;

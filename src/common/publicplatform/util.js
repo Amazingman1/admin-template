@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { JSEncrypt } from './jsencrypt'
 import { GibberishAES } from './gibberish-aes'
-import { CryptoJS } from './crypto-js.js';
+import {MD5} from './crypto-js.js';
 import { getValue, getAppType } from '../js/js-bridge'
 import { getUUID, system } from '../js/util';
 export default {
@@ -29,7 +29,8 @@ export default {
       },
       // 还需要一个MD5的函数,
       h5MD5: function (text) {
-        var sign = CryptoJS.MD5(text).toString().toUpperCase()
+        // console.log(CryptoJS, 'CryptoJS');
+        var sign = MD5(text).toString().toUpperCase()
         return sign
       },
 
@@ -47,11 +48,16 @@ export default {
   },
   // 参数加密
   buildCAParams(paramStr) {
+    console.log(paramStr)
     let rsa = rsa || new this.RSA();
+    // return
     // 生成随机数 16位的随机数key；
     let rk = rsa.generateMixed();
+
     // 将从开发平台请求回来的公钥获取 这个存储方式待定
     let publicKey = getValue('publicKey')
+    // console.log('传给开放平台traceLogId参数:')
+
     // 使用 h5CommonRsa 方法 使用公钥和随机数进行加密
     let erk = rsa.h5CommonRsa(publicKey, rk);
     // 使用 AES_EncodeForCA 对入参字符串 和随机数进行加密 并去除换行符

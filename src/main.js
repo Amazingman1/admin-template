@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
-
+console.log(process.env, '环境')
 // set ElementUI lang to EN
 Vue.use(ElementUI)
 // 如果想要中文版 element-ui，按如下方式声明

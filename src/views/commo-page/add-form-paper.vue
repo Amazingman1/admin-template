@@ -1,8 +1,7 @@
 <template>
   <div class="app-container">
     <div style="background:#fff;padding: 10px">
-      <div>创建报件表单</div>
-
+      <div style="margin-bottom:10px">创建报件表单</div>
       <div class="form-content">
         <NewForm />
         <el-table
@@ -64,10 +63,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$boderColor: #EBEEF5;
 .hearder{
   display: flex;
   justify-content: space-between;
-  border-bottom: solid 2px #ccc;
+  border-bottom: solid 2px $boderColor;
   padding: 10px;
 }
 .content{

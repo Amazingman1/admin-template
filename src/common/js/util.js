@@ -1,11 +1,7 @@
 /* eslint-disable */
 import axios from 'axios'
-// import CryptoJS from 'crypto-js/crypto-js'
-// import { Alert } from 'element-ui'
-// import { Toast, Dialog } from 'vant'
-// import { EnvConfig } from '../../config/apiconfig'
-// import { setValue, getValue, getAppType } from '../../common/js/js-bridge'
 import publicPlatformUtil from '../../common/publicplatform/util'
+import { getValue } from './js-bridge'
 
 // 获取URL上拼接的单独参数
 export const getParam = (name) => {
@@ -162,30 +158,32 @@ export function getNewToken(api, params) {
       requestType: 'H5',
       productNo: getValue('loginProductNo')
     }
-    let baseURL = EnvConfig.interfaceUrl + 'mapi/applyLoginFactor'
+    let baseURL = process.env.VUE_APP_BASE_KEY + 'mapi/applyLoginFactor'
     // 先调用公钥接口
     Request.post(baseURL, publicKeyParams).then(function (res) {
       setValue('publicKey', res.data.result.nonce)
-      let tokenApi = EnvConfig.interfaceUrl + 'mapi/cf/publicStageMini/tokenLoginEncMUA'
-      let param = {
-        requestSystem: system,
-        productNo: getValue('loginProductNo'),
-        appVersion: '1.1.0',
-        traceLogId: getUUID(),
-        appType: getAppType(),
-        loginToken: getValue('loginToken')
-      };
-      let tokenData = publicPlatformUtil.buildCAParams(JSON.stringify(param))
-      // 再调用获取token接口
-      Request.post(tokenApi, tokenData).then(function (value) {
-        let resResult = {
-          result: value.data.result,
-          success: value.data.success,
-          errorCode: value.data.errorCode,
-          errorMsg: value.data.errorMsg,
-        }
-        resolve(resResult)
-      })
+      resolve(res)
+
+      // let tokenApi = process.env.VUE_APP_BASE_KEY + 'mapi/cf/publicStageMini/tokenLoginEncMUA'
+      // let param = {
+      //   requestSystem: system,
+      //   productNo: getValue('loginProductNo'),
+      //   appVersion: '1.1.0',
+      //   traceLogId: getUUID(),
+      //   appType: getAppType(),
+      //   loginToken: getValue('loginToken')
+      // };
+      // let tokenData = publicPlatformUtil.buildCAParams(JSON.stringify(param))
+      // // 再调用获取token接口
+      // Request.post(tokenApi, tokenData).then(function (value) {
+      //   let resResult = {
+      //     result: value.data.result,
+      //     success: value.data.success,
+      //     errorCode: value.data.errorCode,
+      //     errorMsg: value.data.errorMsg,
+      //   }
+      //   resolve(resResult)
+      // })
     })
   })
 }
@@ -250,12 +248,8 @@ export default function (Vue) {
     decode,
     encode,
     showAlert,
-    Toasts,
-    userTypeMap,
-    orderStateFormat,
     getParam,
     getURLParam,
-    txnStatus,
     fenToyuan
   }
 }

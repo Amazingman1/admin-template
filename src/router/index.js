@@ -58,12 +58,12 @@ export const constantRoutes = [
     path: '/add-news-paper',
     component: Layout,
     redirect: '/commo-page/add-news-paper',
-    name: '新增报件',
+    name: '报件管理',
     meta: {
       title: '新增报件',
       icon: 'nested'
     },
-    // hidden: true,
+    hidden: true,
     children: [
       {
         path: 'addpaper',
